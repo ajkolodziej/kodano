@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Products list:</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>lp.</th>
+                <th>name</th>
+                <th>price</th>
+                <th>categories</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>lp.</th>
+                <th>name</th>
+                <th>price</th>
+                <th>categories</th>
+                <th>actions</th>
+            </tr>
+        </tfoot>
+    {% for key, product in products %}
+        <tr>
+            <td>{{key+1}}</td>
+            <td>{{ product.getName() }}</td>
+            <td>{{ product.getPrice()}}</td>
+            <td>
+                <ul>
+                    {% for category in product.getCategory() %}
+                        <li>
+                            <a href="{{path('categories_show', {id:category.getId()})}}">
+                            {{category.getCode()}}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <a href="{{ path('products_show', 
+                            { id: product.getId() }) 
+                        }}">View</a>
+            </td>
+        </tr>
+    {% endfor %}
+</div>
+{% endblock %}
