@@ -1,26 +1,34 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProductController!{% endblock %}
+{% block title %}Product deatils{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Product details:</h1>
-    <ul>
-        <li>Name: {{ product.getName() }} </li>
-        <li>Price: {{ product.getPrice() }} </li>
-        <li>
-            <span>Categories:</span>
-            <ul>
-                {% for category in product.getCategory() %} 
-                    <li>{{ category.getCode() }}</li>
-                {% endfor %}
-            <ul>
-         </li>
-    </ul>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1>Product details:</h1>
+        </div>
+        <div class="card-body">
+            <div class="mb-3">
+                <h2>Name: </h2>{{ product.getName() }}
+            </div>
+            <div class="mb-3">
+                <h4 class="bold">Price: </h4> {{ product.getPrice() }}
+            </div>
+            <div class="mb-3">
+                <h5>Categories</h5>
+                <ul   class="list-unstyled">
+                    {% for category in product.getCategory() %} 
+                        <li>
+                            <a href="{{path('categories_show', {id:category.getId()})}}"  class="text-info stretched-link">
+                            {{category.getCode()}}
+                            </a>
+                        </li>
+                    {% endfor %}
+                <ul>
+            </div>
+        </div>
+    </div>
+   
 </div>
 {% endblock %}
